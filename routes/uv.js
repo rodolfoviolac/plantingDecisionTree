@@ -1,4 +1,4 @@
-const Uv = require('./../models/Uv')
+const Uv = require('./../models/uv')
 
 module.exports = async (req, res) => {
   Uv.findOne().sort({createdAt:-1}).then((uv) => {
