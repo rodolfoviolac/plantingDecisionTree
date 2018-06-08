@@ -1,5 +1,5 @@
 const Uv = require('./../models/uv')
-const Soil = require('./../models/Soil')
+const Soil = require('./../models/soil')
 const Weather = require('./../models/weather')
 const Forecast = require('./../models/forecast')
 

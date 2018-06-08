@@ -1,4 +1,4 @@
-const Soil = require('./../models/Soil')
+const Soil = require('./../models/soil')
 
 module.exports = async (req, res) => {
   Soil.findOne().sort({createdAt:-1}).then((soil) => {
