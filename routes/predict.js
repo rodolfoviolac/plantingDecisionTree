@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const predict = require('./source')
+const predict = require('../helpers/mlResources')
 
 //Previsao Clima, Tempo Atual, Temperatura, PH, Luminosidade, Umidade, Pluviométrico
-router.post('/', function(req, res, next) {
+module.exports = (req, res) => {
   if(!req.body.previsao ||
     !req.body.climaAtual ||
     !req.body.temperatura ||
@@ -15,8 +15,13 @@ router.post('/', function(req, res, next) {
   }
   let result = predict.classify([req.body.previsao, req.body.climaAtual, req.body.temperatura,req.body.ph,req.body.luminosidade,req.body.umidade,req.body.pluviometrico])
   let porcent = Object.keys(result)[0];
+  console.log(result)
   res.status(200).send({resultado: porcent})
+};
 
-});
 
-module.exports = router;
+// let sensors = {}
+// let uv = await Uv.findOne().sort({createdAt:-1}).exec();
+// let weather = await Weather.findOne().sort({createdAt:-1}).exec();
+// let forecast = await Forecast.findOne().sort({createdAt:-1}).exec();
+// let Soil = await Forecast.findOne().sort({createdAt:-1}).exec();

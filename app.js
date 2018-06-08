@@ -1,12 +1,14 @@
-const createError = require('http-errors');
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-const predictRouter = require('./routes/predict');
-const predict = require('./routes/source')
+
+
+// const predict = require('./helpers/mlResources')
+const cron = require('node-cron');
+const {getWeatherForcast, getWeather, getUv, getSoil} = require('./helpers/helpers')
 
 let app = express();
 
@@ -19,15 +21,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', indexRouter);
-app.use('/predict', predictRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+
+cron.schedule('*/60 * * * *', function(){
+  getWeatherForcast();
+  getWeather();
+  getWeatherForcast();
+  getUv();
+  getSoil();
 });
 
-predict.build();
+
+
+app.get('/', function(req, res, next) {
+  res.render('index');
+});
+
+app.post('/predict', require('./routes/predict'));
+app.get('/weather', require('./routes/weather'));
+app.get('/forecast', require('./routes/forecast'));
+app.get('/uv', require('./routes/uv'));
+app.get('/sensors', require('./routes/sensors'));
+app.get('/soil', require('./routes/soil'));
 
 // error handler
 app.use(function(err, req, res, next) {
