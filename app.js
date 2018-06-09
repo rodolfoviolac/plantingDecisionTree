@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-cron.schedule('*/30 * * * *', function(){
+cron.schedule('*/10 * * * *', function(){
   getWeatherForcast();
   getWeather();
   getWeatherForcast();
