@@ -12,6 +12,11 @@ This project was developed to cover the needs for the development of a software 
 # Features:
 
   - Predict Planting
+  - POA Weather
+  - POA Weather Forecast
+  - POA UV
+  - POA Soil
+  
 
 # Routes:
 ### [POST] /predict:
@@ -19,13 +24,18 @@ This project was developed to cover the needs for the development of a software 
 Input:
 ```javascript
 {
-    "previsao": "Sol",      // Options: String "Sol", "Chuva" or "Nublado"
-    "climaAtual": "Sol",    // Options: String "Sol", "Chuva" or "Nublado"
-    "temperatura": "25",    // Options: Number +-
-    "ph": "3",              // Options: Number 0-14
-    "luminosidade": "22",   // Options: Number 0-24
-    "umidade": "55",        // Options: Number 0-100
-    "pluviometrico": "0"    // Options: Number 0-100
+    "weatherId": "Rain",    
+    "forecastId": "Clouds",   
+    "soilMoisture": "10",   
+    "soilT0": "18",       
+    "soilT10": "15",   
+    "temperature": "27",      
+    "ph": "6",   
+    "luminosity":"10",
+    "humidity":"87",
+    "pluviometric":"120",
+    "cloudness":"30",
+    "pressure":"1000",
 }
 ```
 Return:
@@ -34,6 +44,11 @@ Return:
     "resultado": "73" // Options: Number 0-100
 }
 ```    
+### [GET] /weather
+### [GET] /forecast
+### [GET] /uv
+### [GET] /soil
+### [GET] /sensors
 
 # Responses Codes:
 ##### [200]: OK
