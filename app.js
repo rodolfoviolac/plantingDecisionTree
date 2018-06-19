@@ -6,7 +6,7 @@ const logger = require('morgan');
 
 
 
-// const predict = require('./helpers/mlResources')
+const predict = require('./helpers/mlResources')
 const cron = require('node-cron');
 const {getWeatherForcast, getWeather, getUv, getSoil} = require('./helpers/helpers')
 
